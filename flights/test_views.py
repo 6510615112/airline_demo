@@ -55,10 +55,12 @@ class FlightViewTestCase(TestCase):
         passenger = Passenger.objects.create(
             first="hemione", last="granger")
         f = Flight.objects.first()
-        f.capacity = 1
+        f.capacity = 2
         f.save()
 
         c = Client()
         c.post(reverse('flights:book', args=(f.id,)),
                {'passenger': passenger.id})
         self.assertEqual(f.passengers.count(), 1)
+
+    
